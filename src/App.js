@@ -70,24 +70,29 @@ import { useState } from 'react';
 const App = () => {
   const [ counter, setCounter ] = useState(100)
 
-  const handleClick = () => {
+  const handleClick = () => 
     setCounter(counter + 1)
-    console.log('clicked')
-  }
+  
 
-  const minusClick = () => {
+  const minusClick = () => 
     setCounter(counter - 1)
-    console.log('clicked')
-  }
+  
+
+  const zeroClick = () => 
+    setCounter(0)
+  
 
   return (
     <div>
       <div>{counter}</div>
-      <button onClick={handleClick}>
+      <button onClick={() => setCounter(counter + 1)}>
         plus
       </button>
-      <button onClick={minusClick}>
+      <button onClick={() => setCounter(counter - 1)}>
         minus
+      </button>
+      <button onClick={() => setCounter(0)}>
+        zero
       </button>
     </div>
   )
