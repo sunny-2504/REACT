@@ -2,7 +2,7 @@ import React from 'react';
 import Total from './Total'
 import Header from './Header';
 import Content from './Content';
-
+import { useState } from 'react';
 
 
 
@@ -16,24 +16,97 @@ import Content from './Content';
 
 
 
+// const App = () => {
+//   const course = 'Half Stack application development'
+//   // const part1 = 'Fundamentals of React'
+//   // const part2 = 'Using props to pass data'
+//   // const part3 = 'State of a component'
+//   // const exercises1 = 10
+//   // const exercises2 = 7
+//   // const exercises3 = 14
+//   // const Part1 = [part1,exercises1]
+//   // const Part2 = [part2,exercises2]
+//   // const Part3 = [part3,exercises3]
+
+//   // const Part1 = {
+//   //   part : 'Fundamentals of React',
+//   //   exercises : 10
+//   // }
+//   // const Part2 = {
+//   //   part : 'Using props to pass data',
+//   //   exercises : 7
+//   // }
+//   // const Part3 =  {
+//   //   part : 'State of a component',
+//   //   exercises : 14
+//   // }
+
+//   const Part  = [
+//     {
+//       part : 'Fundamentals of React',
+//       exercises : 10
+//     },
+//      {
+//       part : 'Using props to pass data',
+//       exercises : 7
+//     },
+//      {
+//       part : 'State of a component',
+//       exercises : 14
+//     }
+//   ]
+
+
+//   return (
+//     <div>
+//       <Header  course={course} />
+//       <Content Part = {Part}/>
+//       {/* <Content Part = {Part2}/>
+//       <Content Part = {Part3}/> */}
+//       <Total exercises={Part[0].exercises + Part[1].exercises + Part[2].exercises}/>
+//     </div>
+//   )
+// }
 const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const part2 = 'Using props to pass data'
-  const part3 = 'State of a component'
-  const exercises1 = 10
-  const exercises2 = 7
-  const exercises3 = 14
-  const Part1 = [part1,exercises1]
-  const Part2 = [part2,exercises2]
-  const Part3 = [part3,exercises3]
+  const [ counter, setCounter ] = useState(100)
+
+  const handleClick = () => {
+    setCounter(counter + 1)
+    console.log('clicked')
+  }
+
+  const minusClick = () => {
+    setCounter(counter - 1)
+    console.log('clicked')
+  }
+
   return (
     <div>
-      <Header course={course} />
-      <Content Part1 = {Part1} Part2 = {Part2} Part3 = {Part3}/>
-      <Total exercises1={exercises1} exercises2={exercises2} exercises3={exercises3} />
+      <div>{counter}</div>
+      <button onClick={handleClick}>
+        plus
+      </button>
+      <button onClick={minusClick}>
+        minus
+      </button>
     </div>
   )
 }
+
+//  const App = () => {
+//   const [ counter, setCounter ] = useState(0)
+
+//   setTimeout(
+//     () => setCounter(counter + 1),
+//     1000
+//   )
+
+//   console.log('rendering...', counter)
+
+//   return (
+//     <div>{counter}</div>)
+// }
+
+
 
 export default App;
