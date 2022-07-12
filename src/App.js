@@ -1,8 +1,5 @@
 import React from 'react';
-import Total from './Total'
-import Header from './Header';
-import Content from './Content';
-import { useState } from 'react';
+
 
 
 
@@ -67,36 +64,40 @@ import { useState } from 'react';
 //     </div>
 //   )
 // }
-const App = () => {
-  const [ counter, setCounter ] = useState(100)
 
-  const handleClick = () => 
-    setCounter(counter + 1)
+
+// const App = () => {
+//   const [ counter, setCounter ] = useState(100)
+
+//   const handleClick = () => 
+//     setCounter(counter + 1)
   
 
-  const minusClick = () => 
-    setCounter(counter - 1)
+//   const minusClick = () => 
+//     setCounter(counter - 1)
   
 
-  const zeroClick = () => 
-    setCounter(0)
+//   const zeroClick = () => 
+//     setCounter(0)
   
 
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={() => setCounter(counter + 1)}>
-        plus
-      </button>
-      <button onClick={() => setCounter(counter - 1)}>
-        minus
-      </button>
-      <button onClick={() => setCounter(0)}>
-        zero
-      </button>
-    </div>
-  )
-}
+//   return (
+//     <div>
+//       <div>{counter}</div>
+//       <button onClick={() => setCounter(counter + 1)}>
+//         plus
+//       </button>
+//       <button onClick={() => setCounter(counter - 1)}>
+//         minus
+//       </button>
+//       <button onClick={() => setCounter(0)}>
+//         zero
+//       </button>
+//     </div>
+//   )
+// }
+
+
 
 //  const App = () => {
 //   const [ counter, setCounter ] = useState(0)
@@ -114,4 +115,87 @@ const App = () => {
 
 
 
+// const App = () => {
+//     const notes = ["React Course","Java Course","Nodejs Couser"]
+//     const [newNote, setNewNote] = useState(
+//       'a new note...'
+//     ) 
+    
+//     const handleNoteChange = (event) => {
+//       // console.log(event.target.value)
+//       setNewNote(event.target.value)
+//       console.log(newNote)
+//     }
+//     const addNote = (event) => {
+//       event.preventDefault()
+      
+//       console.log('button clicked', event.target)
+//     }
+   
+  
+//     return (
+//       <div>
+//         <h1>Notes</h1>
+//         <ul>
+//           {notes.map(note => 
+//             <li key={note}>{note}</li>
+//           )}
+//         </ul>
+//         <form onSubmit={addNote}>
+//           <input 
+//           value={newNote}
+//           onChange={handleNoteChange}
+//           />
+//           <button type="submit">save</button>
+//         </form>   
+//       </div>
+//     )
+//   }
+import Note from './Note'
+import { useState } from 'react'
+
+const App = (props) => {
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState('') 
+
+  const addNote = (event) => {
+    event.preventDefault()
+    const noteObject = {
+      content: newNote,
+      date: new Date().toISOString(),
+      important: Math.random() < 0.5,
+      id: notes.length + 1,
+    }
+  
+    setNotes(notes.concat(noteObject))
+    setNewNote('')
+  }
+
+  const handleNoteChange = (event) => {
+    console.log(event.target.value)
+    setNewNote(event.target.value)
+  }
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
+        )}
+      </ul>
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={handleNoteChange}
+        />
+        <button type="submit">save</button>
+      </form>   
+    </div>
+  )
+}
+
 export default App;
+
+
+
