@@ -157,16 +157,19 @@ import axios from 'axios'
 
 const App = (props) => {
   const [notes, setNotes] = useState([])
-  const [newNote, setNewNote] = useState('') 
-
+  const [newNote, setNewNote] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+ 
   useEffect(() => {
     axios
-        .get('http://localhost:4000/notes')
+        .get('http://localhost:4000/test')
         .then(response => {
           console.log(response.data)
           setNotes(response.data)
         })
-  }, [])
+  },[])
 
   const addNote = (event) => {
     event.preventDefault()
@@ -186,6 +189,26 @@ const App = (props) => {
     setNewNote(event.target.value)
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+     fetch('http://localhost:4000/register', {
+      method : 'POST',
+      headers : {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password
+      })
+     }).then(( res) => {
+      console.log(res)
+      if(res.ok){
+        alert('registered')
+      }
+     })
+  }
+
   return (
     <div>
       <h1>Notes</h1>
@@ -194,13 +217,22 @@ const App = (props) => {
           <Note key={note.id} note={note} />
         )}
       </ul>
-      <form onSubmit={addNote}>
+      {/* <form onSubmit={addNote}>
         <input
           value={newNote}
           onChange={handleNoteChange}
         />
         <button type="submit">save</button>
-      </form>   
+      </form>    */}
+      <form onSubmit={(e) => onSubmit(e)}>
+        <input type="text" onChange={(e) => setName(e.target.value)}></input>
+        <label>Name</label>
+        <input type="text" onChange={(e) => setEmail(e.target.value)}></input>
+        <label>Email</label>
+        <input type="password" onChange={(e) => setPassword(e.target.value)}></input>
+        <label>Password</label>
+        <button type="submit">Register</button>
+      </form>
     </div>
   )
 }
